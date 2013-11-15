@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html>
- <head>
- 	<meta charset="UTF-8" />
- 	<meta name="viewport" content="width=device-width, initial-scale=1">
- 	<title>Title</title>
- 	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.min.css" type="text/css">
- 	<script type="text/javascript" src="js/jquery.js"></script>
- 	<script type="text/javascript" src="js/app.js"></script>
- 	<script type="text/javascript" src="js/jquery.mobile-1.3.1.min.js"></script>
- 	<script type="text/javascript" src="cordova.js"></script>
- 	<link rel="stylesheet" href="css/app.css" type="text/css">
- </head>
- <body>
- 	<div data-role="page" id="login">
- 		<div data-role="content">
- 			<br><br><div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed="false">
-			    <h4>Boilerplate Login Panel</h4>
-			    <div data-role="fieldcontain">
-			    <label for="textinput-fc">Username:</label>
-			    <input type="text" name="textinput-fc" id="textinput-fc" placeholder="Email Address / Username" value="">
-			</div>
-			<div data-role="fieldcontain">
-			    <label for="textinput-fc">Password:</label>
-			    <input type="text" name="textinput-fc" id="textinput-fc" placeholder="Password" value="">
-			</div>
- 			<a href="#home" data-role="button" data-transition="none">Click to Login</a>
-			</div>
- 		</div>
- 	</div>
-
- 	<div data-role="page" id="home" data-add-back-btn="true">
- 		<div data-role="header">
- 			<h1>Header Text</h1>
- 		</div>
- 		<div data-role="content">
- 			<h3>This is the Homepage of the App</h3>
- 		</div>
- 		<div data-role="footer" data-position="fixed">
- 			<h1>&copy; Footer Text</h1>
- 		</div>
- 	</div>
- </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery Mobile: Theme Download</title>
+    <link rel="stylesheet" href="themes/Blue.min.css" />
+    <link rel="stylesheet" href="res/styles/jquery.mobile.structure-1.3.2.min.css" />
+    <script src="res/js//jquery-1.9.1.min.js"></script>
+    <script src="res/js/jquery.mobile-1.3.2.min.js"></script>
+    <script src="res/js/cordova.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="a">
+    <div data-role="header" data-position="inline">
+        <h1>It Worked!</h1>
+    </div>
+    <div data-role="content" data-theme="a">
+        <p>Your theme was successfully downloaded. You can use this page as a reference for how to link it up!</p>
+				<pre>
+<strong>&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/Blue.min.css&quot; /&gt;</strong>
+&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile.structure-1.3.2.min.css&quot; /&gt;
+&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js&quot;&gt;&lt;/script&gt;
+				</pre>
+        <p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+        <label for="slider1">Input slider:</label>
+        <input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
+        <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+            <legend>Cache settings:</legend>
+            <input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+            <label for="radio-choice-a1">On</label>
+            <input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+            <label for="radio-choice-b1">Off</label>
+        </fieldset>
+    </div>
+</div>
+</body>
 </html>
+<script>
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		document.addEventListener("pause", onPause, false);
+		document.addEventListener("resume", onResume, false);
+		alert("Device is Ready");
+
+	}
+
+
+//What to do when paused
+function onPause(){
+	
+	alert("paused!");
+}
+
+//What to do when resumed
+function onResume()
+{
+	
+	alert("resume");
+}
+</script>
