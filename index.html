@@ -3,27 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trivi</title>
-    <link rel="stylesheet" href="themes/Blue.min.css" />
+    <title>Trivia</title>
+    <link rel="stylesheet" href="themes/MyBlueWhite.min.css" />
     <link rel="stylesheet" href="res/styles/jquery.mobile.structure-1.3.2.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <script src="res/js/jquery-1.9.1.min.js"></script>
     <script src="res/js/jquery.mobile-1.3.2.min.js"></script>
     <script src="res/js/cordova.js"></script>
 </head>
 <body>
 <!-- Start of first page -->
-<div data-role="page" id="main" data-theme="a">
+<div data-role="page" id="home">
     <div data-role="content">
         <img src="res/Trivia-Logo.png">
         <div data-role="controlgroup">
-            <a href="#question?num=1" data-role="button">Play</a>
+            <a href="#question?num=random" data-role="button">Play</a>
             <a href="#" data-role="button">Settings</a>
             <a href="#about" data-role="button">About</a>
         </div>
     </div>
 </div>
 
-<div data-role="page" id="about" data-theme="a" data-add-back-btn="true">
+<div data-role="page" id="about" data-add-back-btn="true">
     <div data-role="header">
         <h1>About</h1>
         </div>
@@ -33,9 +34,9 @@
     </div>
 </div>
 
-<div data-role="page" id="question-page" data-theme="a">
+<div data-role="page" id="question-page">
     <div data-role="header">
-        <a href="index.html" data-role="button" data-rel="back" data-mini="true">Quit</a>
+        <a href="#home" data-role="button" data-mini="true">Quit</a>
         <h1>Q#132</h1>
     </div>
     <div data-role="content">
@@ -58,7 +59,8 @@
         // only handle changePage() when loading a page by URL.
         if ( typeof data.toPage === "string" ) {
             // Handle URLs that request chapter page
-            var url = $.mobile.path.parseUrl( data.toPage ), regex = /^#question/;
+            var url = $.mobile.path.parseUrl( data.toPage );
+            var regex = /^#question/;
             if ( url.hash.search(regex) !== -1 ) {
                 showQuestion( url, data.options );
                 // tell changePage() we've handled this
@@ -72,17 +74,25 @@
     {
 
         var questionNumber = urlObj.hash.replace( /.*num=/, "" );
+        $.mobile.showPageLoadingMsg();
 
-        $.getJSON( "questions.js", function( data ) {
+        $.getJSON( "questions.json", function( data ) {
 
-            $.mobile.hidePageLoadingMsg();
 
-            $.each( data, function( key, val ) {
-                if(key == 'Q'+questionNumber){
+            if(questionNumber == 'random'){
+                          var ran = Math.floor((Math.random()*data.length)+1);
+                questionNumber = ran;
+            }
 
-                    var quest = this;
+                   var quest;
+                   for(q in data){
+                       if(data[q].id == questionNumber){
+                           quest = data[q];
+                           break;
+                       }
+                   }
 
-                    $.mobile.showPageLoadingMsg();
+
                     // Get the page we are going to dump our content into.
                     var $page = $( "#question-page" );
 
@@ -94,23 +104,22 @@
 
                     // Find the h1 element in our header and inject the name of
                     // the category into it.
-                    $header.find( "h1" )[0].innerHTML = 'Q#'+questionNumber;
+                    $header.find( "h1" )[0].innerHTML = 'Q#'+quest.id;
 
                     $content.find( "h3" )[0].innerHTML = quest.question;
 
                     var choices = $content.find( "a" );
-                    choices[0].innerHTML = quest.choices.A;
-                    choices[1].innerHTML = quest.choices.B;
-                    choices[2].innerHTML = quest.choices.C;
-                    choices[3].innerHTML = quest.choices.D;
+                    choices[0].innerHTML = quest.choice1;
+                    choices[1].innerHTML = quest.choice2;
+                    choices[2].innerHTML = quest.choice3;
+                    choices[3].innerHTML = quest.choice4;
 
+            $page.page();
                     options.dataUrl = urlObj.href;
-
+            $.mobile.hidePageLoadingMsg();
                     $.mobile.changePage( $page, options );
 
                     return;
-                }
-            });
 
         });
     }
