@@ -4,10 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trivia</title>
-    <link rel="stylesheet" href="themes/MyBlueWhite.min.css" />
-    <link rel="stylesheet" href="res/styles/jquery.mobile.structure-1.3.2.min.css" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="themes/MyBlueWhite.min.css"/>
+    <link rel="stylesheet" href="res/styles/jquery.mobile.structure-1.3.2.min.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
     <script src="res/js/jquery-1.9.1.min.js"></script>
+    <script>
+        var myquestions;
+        $(document).bind("mobileinit", function () {
+            $.mobile.allowCrossDomainPages = true;
+            $.mobile.defaultPageTransition = 'slide';
+            $.mobile.phonegapNavigationEnabled = true;
+            $.getJSON("questions.json", function (data) {
+                alert('done');
+                myquestions = data;
+            });
+
+        })
+    </script>
     <script src="res/js/jquery.mobile-1.3.2.min.js"></script>
     <script src="res/js/cordova.js"></script>
 </head>
@@ -16,8 +29,9 @@
 <div data-role="page" id="home">
     <div data-role="content">
         <img src="res/Trivia-Logo.png">
+
         <div data-role="controlgroup">
-            <a href="#question?num=random" data-role="button">Play</a>
+            <a href="#question-page?num=random" data-role="button">Play</a>
             <a href="#" data-role="button">Settings</a>
             <a href="#about" data-role="button">About</a>
         </div>
@@ -27,101 +41,171 @@
 <div data-role="page" id="about" data-add-back-btn="true">
     <div data-role="header">
         <h1>About</h1>
-        </div>
+    </div>
     <div data-role="content">
-        <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, trivia style, multiple choice quiz game.</p>
-        <p>To download this app for other platforms visit <a href="http://build.phonegap.com/apps/646900/share" rel="external">here</a></p>
+        <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, trivia style,
+            multiple choice quiz game.</p>
+
+        <p>To download this app for other platforms visit <a href="http://build.phonegap.com/apps/646900/share"
+                                                             rel="external">here</a></p>
     </div>
 </div>
 
 <div data-role="page" id="question-page">
     <div data-role="header">
-        <a href="#home" data-role="button" data-mini="true">Quit</a>
+        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
+
         <h1>Q#132</h1>
     </div>
     <div data-role="content">
-        <div id="question">
-            <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
-        </div>
-        <div data-role="controlgroup" id="choices">
-            <a href="#" data-role="button">Option 1</a>
-            <a href="#" data-role="button">Option 2</a>
-            <a href="#" data-role="button">Option 3</a>
-            <a href="#" data-role="button">Option 4</a>
-        </div>
+        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
+        </ul>
+    </div>
+    <div id="correctpop1" data-role="popup" data-theme="e">
+        <h1>Correct!</h1>
+    </div>
+    <div id="incorrectpop1" data-role="popup" data-theme="b">
+        <h1>Wrong</h1>
+    </div>
+</div>
+
+<div data-role="page" id="question-page2">
+    <div data-role="header">
+        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
+
+        <h1>Q#132</h1>
+    </div>
+    <div data-role="content">
+        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
+        </ul>
+    </div>
+    <div id="correctpop2" data-role="popup" data-theme="e">
+        <h1>Correct!</h1>
+    </div>
+    <div id="incorrectpop2" data-role="popup" data-theme="b">
+        <h1>Wrong</h1>
     </div>
 </div>
 
 </body>
 </html>
 <script>
-    $(document).bind( "pagebeforechange", function( e, data ) {
+
+    $( "#incorrectpop1" ).bind({
+        popupafteropen: function(event, ui) {
+            setTimeout(function () { $( "#incorrectpop1").popup( "close" )}, 100);
+        }});
+
+    $( "#incorrectpop2" ).bind({
+        popupafteropen: function(event, ui) {
+            setTimeout(function () { $( "#incorrectpop2").popup( "close" )}, 100);
+        }});
+
+    var count1;
+    var count2;
+    $(document).bind("pagebeforechange", function (e, data) {
         // only handle changePage() when loading a page by URL.
-        if ( typeof data.toPage === "string" ) {
+        if (typeof data.toPage === "string") {
             // Handle URLs that request chapter page
-            var url = $.mobile.path.parseUrl( data.toPage );
-            var regex = /^#question/;
-            if ( url.hash.search(regex) !== -1 ) {
-                showQuestion( url, data.options );
+            var url = $.mobile.path.parseUrl(data.toPage);
+            var regex = /^#question-page/;
+            if (url.hash.search(regex) !== -1) {
+                showQuestion(url, data.options);
                 // tell changePage() we've handled this
                 e.preventDefault();
+
             }
         }
     });
 
 
-    function showQuestion( urlObj, options )
-    {
+    function showQuestion(urlObj, options) {
+        var data = myquestions;
 
-        var questionNumber = urlObj.hash.replace( /.*num=/, "" );
-        $.mobile.showPageLoadingMsg();
-
-        $.getJSON( "questions.json", function( data ) {
-
-
-            if(questionNumber == 'random'){
-                          var ran = Math.floor((Math.random()*data.length)+1);
-                questionNumber = ran;
+        var questionNumber = urlObj.hash.replace(/.*num=/, "");
+        var $page;
+        var pagen;
+        if (questionNumber == 'next') {
+            var ran = Math.floor((Math.random() * data.length) + 1);
+            questionNumber = ran;
+            if ($.mobile.activePage.attr("id") == "question-page") {
+                $page = $("#question-page2");
+                pagen = 2;
+            } else {
+                $page = $("#question-page");
+                pagen = 1;
             }
+        } else if (questionNumber == 'random') {
+            var ran = Math.floor((Math.random() * data.length) + 1);
+            questionNumber = ran;
+            $page = $("#question-page");
+            pagen = 1;
+        }
+        var quest;
+        for (q in data) {
+            if (data[q].id == questionNumber) {
+                quest = data[q];
+                break;
+            }
+        }
 
-                   var quest;
-                   for(q in data){
-                       if(data[q].id == questionNumber){
-                           quest = data[q];
-                           break;
-                       }
-                   }
+        // Get the header for the page.
+        var $header = $page.children(":jqmData(role='header')");
 
+        // Get the content area element for the page.
+        var $content = $page.children(":jqmData(role='content')");
 
-                    // Get the page we are going to dump our content into.
-                    var $page = $( "#question-page" );
+        // Find the h1 element in our header and inject the name of
+        // the category into it.
+        $header.find("h1").html('Q#' + quest.id);
 
-                    // Get the header for the page.
-                    var $header = $page.children( ":jqmData(role=header)" );
+        $content.find("h3")[0].innerHTML = quest.question;
 
-                    // Get the content area element for the page.
-                    var $content = $page.children( ":jqmData(role=content)" );
+        var choices = $content.find("a");
+        choices[0].innerHTML = quest.choice1;
+        choices[1].innerHTML = quest.choice2;
+        choices[2].innerHTML = quest.choice3;
+        choices[3].innerHTML = quest.choice4;
 
-                    // Find the h1 element in our header and inject the name of
-                    // the category into it.
-                    $header.find( "h1" )[0].innerHTML = 'Q#'+quest.id;
+        choices[0].href = '#incorrectpop' + pagen;
+        choices[1].href = '#incorrectpop' + pagen;
+        choices[2].href = '#incorrectpop' + pagen;
+        choices[3].href = '#incorrectpop' + pagen;
 
-                    $content.find( "h3" )[0].innerHTML = quest.question;
+        var aq = choices[quest.answer - 1];
 
-                    var choices = $content.find( "a" );
-                    choices[0].innerHTML = quest.choice1;
-                    choices[1].innerHTML = quest.choice2;
-                    choices[2].innerHTML = quest.choice3;
-                    choices[3].innerHTML = quest.choice4;
+        $(aq).bind("click", function (event, ui) {
+            $(aq).unbind("click");
 
-            $page.page();
-                    options.dataUrl = urlObj.href;
-            $.mobile.hidePageLoadingMsg();
-                    $.mobile.changePage( $page, options );
+            $(aq).attr('href', '#correctpop' + pagen)
 
-                    return;
+            count1 = setTimeout(function () {
+                clearTimeout(count1);
+                $.mobile.changePage('#question-page?num=next', {
+                    transition: "slide",
+                    showLoadMsg: false
+                });
+            }, 500);
 
         });
+
+        var cur = choices[0];
+
+    $page.page();
+    $content.find(":jqmData(role='listview')").listview();
+    options.dataUrl = urlObj.href + '?num=' + questionNumber;
+    $.mobile.changePage($page, options);
+
     }
 
-</script>
+</script>ipt>
