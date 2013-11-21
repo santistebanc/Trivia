@@ -202,13 +202,11 @@
             }
             questionNumber = data[count].id;
             quest = data[count];
-            count += 1;
         }else if (questionNumber == 'restart') {
             shuffle(data);
             count = 0;
             questionNumber = data[0].id;
             quest = data[0];
-            count += 1;
         }else if(isNaN(questionNumber)){
             return;
         } else {
@@ -260,6 +258,7 @@
 
         $(aq).bind("click", function (event, ui) {
             $(aq).unbind("click");
+            count += 1;
 
             $(aq).attr('href', '#correctpop' + pagen)
 
