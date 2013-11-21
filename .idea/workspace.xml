@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5531819a-f1a6-4e15-97d9-d317d2adaa4b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\Trivia.iml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Carlos\Trivia\.idea\workspace.xml" afterPath="" />
     </list>
     <ignored path="Trivia.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385006533747" ignored="false" />
+    <file path="/Dummy.txt" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385006741986" ignored="false" />
     <file path="/index.html" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385004026659" ignored="false" />
     <file path="/config.xml" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1384523235635" ignored="false" />
     <file path="/corstest.html" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385000090808" ignored="false" />
@@ -32,7 +38,7 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="260" column="23" selection-start="9501" selection-end="9501" vertical-scroll-proportion="0.27115384">
+            <state line="268" column="30" selection-start="9781" selection-end="9781" vertical-scroll-proportion="0.5326923">
               <folding />
             </state>
           </provider>
@@ -124,6 +130,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Trivia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Trivia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Trivia" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -240,7 +260,11 @@
       <created>1385006537579</created>
       <updated>1385006537579</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="invalid characters fixed">
+      <created>1385006748884</created>
+      <updated>1385006748884</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -265,13 +289,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24944155" sideWeight="0.6013629" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24944155" sideWeight="0.6013629" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39863715" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -328,7 +352,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="quit and play bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="invalid characters fixed" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -348,6 +372,7 @@
     <MESSAGE value="correct wrong funcionan" />
     <MESSAGE value="external database json questions" />
     <MESSAGE value="quit and play bug fixed" />
+    <MESSAGE value="invalid characters fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -406,7 +431,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="260" column="23" selection-start="9501" selection-end="9501" vertical-scroll-proportion="0.27115384">
+        <state line="268" column="30" selection-start="9781" selection-end="9781" vertical-scroll-proportion="0.5326923">
           <folding />
         </state>
       </provider>
