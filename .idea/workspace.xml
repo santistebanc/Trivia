@@ -6,7 +6,7 @@
     </list>
     <ignored path="Trivia.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385006887338" ignored="false" />
+    <file path="/Dummy.txt" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385006924055" ignored="false" />
     <file path="/index.html" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385004026659" ignored="false" />
     <file path="/config.xml" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1384523235635" ignored="false" />
     <file path="/corstest.html" changelist="5531819a-f1a6-4e15-97d9-d317d2adaa4b" time="1385000090808" ignored="false" />
@@ -262,7 +262,11 @@
       <created>1385006889709</created>
       <updated>1385006889709</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="invalid characters fixed2">
+      <created>1385006927163</created>
+      <updated>1385006927163</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -286,7 +290,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879046" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
