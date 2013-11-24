@@ -4,88 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trivia</title>
-    <link rel="stylesheet" href="themes/MyBlueWhite.min.css"/>
+    <link rel="stylesheet" href="themes/new.min.css"/>
     <link rel="stylesheet" href="res/styles/jquery.mobile.structure-1.3.2.min.css"/>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css"/>
+    <link rel="shortcut icon" href="res/favicon.ico">
     <script src="res/js/jquery-1.9.1.min.js"></script>
-    <script>
-        var myquestions;
-        var count = 0;
-        var tim;
-        var questdata = [];
-
-        function loadquestdata(data){
-            var tam = data.feed.entry.length;
-           for(i=0;i<tam;i++){
-               questdata[i]=new Object();
-               questdata[i].id = data.feed.entry[i]['gsx$id']['$t'];
-               questdata[i].question = data.feed.entry[i]['gsx$question']['$t'];
-               questdata[i].choice1 = data.feed.entry[i]['gsx$choice1']['$t'];
-               questdata[i].choice2 = data.feed.entry[i]['gsx$choice2']['$t'];
-               questdata[i].choice3 = data.feed.entry[i]['gsx$choice3']['$t'];
-               questdata[i].choice4 = data.feed.entry[i]['gsx$choice4']['$t'];
-               questdata[i].answer = data.feed.entry[i]['gsx$answer']['$t'];
-               questdata[i].difficulty = data.feed.entry[i]['gsx$difficulty']['$t'];
-               questdata[i].date = data.feed.entry[i]['gsx$date']['$t'];
-               questdata[i].source = data.feed.entry[i]['gsx$source']['$t'];
-           }
-        }
-
-        $(document).bind("mobileinit", function () {
-            $.support.cors = true;
-            $.mobile.allowCrossDomainPages = true;
-            $.mobile.defaultPageTransition = 'slide';
-            $.mobile.phonegapNavigationEnabled = true;
-            $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0Ahrn8W_r85_odDJ1a0hnLUZOa05vSVNzemtPOXN1MXc/od6/public/values?alt=json", function (data) {
-                loadquestdata(data);
-                shuffle(questdata);
-                myquestions = questdata;
-                $('#play').removeClass("ui-disabled");
-            });
-
-        })
-
-        function shuffle(array) {
-            var currentIndex = array.length
-                    , temporaryValue
-                    , randomIndex
-                    ;
-
-            // While there remain elements to shuffle...
-            while (0 !== currentIndex) {
-
-                // Pick a remaining element...
-                randomIndex = Math.floor(Math.random() * currentIndex);
-                currentIndex -= 1;
-
-                // And swap it with the current element.
-                temporaryValue = array[currentIndex];
-                array[currentIndex] = array[randomIndex];
-                array[randomIndex] = temporaryValue;
-            }
-
-            return array;
-        }
-
-    </script>
+    <script src="initializing.js"></script>
     <script src="res/js/jquery.mobile-1.3.2.min.js"></script>
     <script src="res/js/cordova.js"></script>
 </head>
 <body>
-<!-- Start of first page -->
-<div data-role="page" id="home">
+
+<!-- Home page -->
+<div id="home" data-role="page" data-theme="a">
     <div data-role="content">
         <img src="res/Trivia-Logo.png">
-
+        <div>
+            <p id='info'></p>
+        </div>
         <div data-role="controlgroup">
-            <a href="#question-page?num=next" data-role="button" class="ui-disabled" id="play">Play</a>
-            <a href="#" data-role="button">Settings</a>
+            <a href="#" data-role="button" id="play" onclick="goCurrentQuestion()">Play</a>
+            <a href="#browse" data-role="button">Questions</a>
             <a href="#about" data-role="button">About</a>
         </div>
     </div>
 </div>
 
-<div data-role="page" id="about" data-add-back-btn="true">
+<!-- About page -->
+<div id="about" data-role="page" data-theme="a" data-add-back-btn="true">
     <div data-role="header">
         <h1>About</h1>
     </div>
@@ -93,201 +38,79 @@
         <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, trivia style,
             multiple choice quiz game.</p>
 
-        <p>To download this app for other platforms visit <a href="http://build.phonegap.com/apps/646900/share"
-                                                             rel="external">here</a></p>
+        <p>To download this app for other platforms visit <a href="http://build.phonegap.com/apps/646900/share">here</a></p>
     </div>
 </div>
 
-<div data-role="page" id="question-page">
+<!-- Question List page-->
+<div id="browse" data-role="page" data-theme="a" data-add-back-btn="true">
     <div data-role="header">
-        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
-
-        <h1>Q#132</h1>
+        <h1>Questions</h1>
     </div>
-    <div data-role="content">
-        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
-        <ul data-role="listview" data-inset="true">
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
-        </ul>
-    </div>
-    <div id="correctpop1" data-role="popup" data-theme="e">
-        <h1>Correct!</h1>
-    </div>
-    <div id="pop1" data-role="popup" data-theme="b">
-        <h1>Wrong</h1>
-    </div>
+    <div data-role="content"></div>
 </div>
 
-<div data-role="page" id="question-page2">
+<!-- No more questions-->
+<div id="no-more-questions" data-role="page" data-theme="a">
     <div data-role="header">
         <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
-
-        <h1>Q#132</h1>
-    </div>
-    <div data-role="content">
-        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
-        <ul data-role="listview" data-inset="true">
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
-            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
-        </ul>
-    </div>
-    <div id="correctpop2" data-role="popup" data-theme="e">
-        <h1>Correct!</h1>
-    </div>
-    <div id="pop2" data-role="popup" data-theme="b">
-        <h1>Wrong</h1>
-    </div>
-</div>
-
-<div data-role="page" id="no-more-questions-page">
-    <div data-role="header">
-        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
-
         <h1>No more questions</h1>
     </div>
-    <div data-role="content" data-theme="e">
-        <h3>Sorry, there are no more questions left</h3>
-        <p>If you don't mind repeating the same questions, you can restart <a href="#question-page?num=restart">here</a></p>
+    <div data-role="content" data-theme='c'>
+        <h3>Sorry, you there are no more questions left. But we'll be uploading new soon.
+            If you don't mind repeating the same questions you can restart <a href="#question?restart">here</a></h3>
+    </div>
+</div>
+
+<!-- Question page 1-->
+<div id="question1" data-role="page" data-theme="a">
+    <div data-role="header">
+        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
+
+        <h1>Q#132</h1>
+    </div>
+    <div data-role="content">
+        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
+        </ul>
+    </div>
+    <div id="correctpop1" data-role="popup" data-theme="b" class="ui-content" data-history="false">
+        <h1>Correct!</h1>
+    </div>
+    <div id="wrongpop1" data-role="popup" data-theme="d" class="ui-content" data-history="false">
+        <h1>Wrong</h1>
+    </div>
+</div>
+
+<!-- Question page 2-->
+<div id="question2" data-role="page" data-theme="a">
+    <div data-role="header">
+        <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
+
+        <h1>Q#132</h1>
+    </div>
+    <div data-role="content">
+        <h3>Question: What is this thing I have to ask as a place holder so it looks like a real trivia question?</h3>
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 1</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 2</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 3</a></li>
+            <li><a href="#" data-rel="popup" data-transition="slide">Option 4</a></li>
+        </ul>
+    </div>
+    <div id="correctpop2" data-role="popup" data-theme="b" class="ui-content" data-history="false">
+        <h1>Correct!</h1>
+    </div>
+    <div id="wrongpop2" data-role="popup" data-theme="d" class="ui-content" data-history="false">
+        <h1>Wrong</h1>
     </div>
 </div>
 
 </body>
 </html>
-<script>
 
-    $( "#pop1" ).bind({
-        popupafteropen: function(event, ui) {
-            setTimeout(function () { $( "#pop1").popup( "close" )}, 100);
-        }});
-
-    $( "#pop2" ).bind({
-        popupafteropen: function(event, ui) {
-            setTimeout(function () { $( "#pop2").popup( "close" )}, 100);
-        }});
-
-
-    $(document).bind("pagebeforechange", function (e, data) {
-        // only handle changePage() when loading a page by URL.
-
-        if (typeof data.toPage === "string") {
-            // Handle URLs that request chapter page
-            var url = $.mobile.path.parseUrl(data.toPage);
-            var regex = /^#question-page/;
-            if (url.hash.search(regex) !== -1) {
-                showQuestion(url, data.options);
-                // tell changePage() we've handled this
-                e.preventDefault();
-
-            }
-        }
-    });
-
-
-    function showQuestion(urlObj, options) {
-        var data = myquestions;
-
-        var questionNumber = urlObj.hash.replace(/.*num=/, "");
-        var $page;
-        var pagen;
-        var quest;
-        if (questionNumber == 'next') {
-            if(count >= data.length){
-                $.mobile.changePage($('#no-more-questions-page'), options);
-                return;
-            }
-            questionNumber = data[count].id;
-            quest = data[count];
-        }else if (questionNumber == 'restart') {
-            shuffle(data);
-            count = 0;
-            questionNumber = data[0].id;
-            quest = data[0];
-        }else if(isNaN(questionNumber)){
-            return;
-        } else {
-                alert(questionNumber);
-                quest = data[questionNumber];
-        }
-
-        if ($.mobile.activePage.attr("id") == "question-page") {
-            $page = $("#question-page2");
-            pagen = 2;
-        } else {
-            $page = $("#question-page");
-            pagen = 1;
-        }
-
-        // Get the header for the page.
-        var $header = $page.children(":jqmData(role='header')");
-
-        // Get the content area element for the page.
-        var $content = $page.children(":jqmData(role='content')");
-
-        // Find the h1 element in our header and inject the name of
-        // the category into it.
-        $header.find("h1").html('Q#' + questionNumber);
-
-        $content.find("h3")[0].innerHTML = quest.question;
-
-        var choices = $content.find("a");
-        var ops = [quest.choice1, quest.choice2, quest.choice3, quest.choice4]
-        var ansi = ops[quest.answer-1];
-                shuffle(ops);
-        choices[0].innerHTML = ops[0];
-        choices[1].innerHTML = ops[1];
-        choices[2].innerHTML = ops[2];
-        choices[3].innerHTML = ops[3];
-
-        choices[0].href = '#pop' + pagen;
-        choices[1].href = '#pop' + pagen;
-        choices[2].href = '#pop' + pagen;
-        choices[3].href = '#pop' + pagen;
-
-        var aq;
-        for(it in choices){
-           if(choices[it].innerHTML == ansi){
-               aq = choices[it];
-               break;
-           }
-        }
-
-        $(aq).bind("click", function (event, ui) {
-            $(aq).unbind("click");
-            count += 1;
-
-            $(aq).attr('href', '#correctpop' + pagen)
-
-            tim = setTimeout(function () {
-                choices[0].href = '#pop' + pagen;
-                choices[1].href = '#pop' + pagen;
-                choices[2].href = '#pop' + pagen;
-                choices[3].href = '#pop' + pagen;
-                clearTimeout(tim);
-                $.mobile.changePage('#question-page?num=next', {
-                    transition: "slide",
-                    showLoadMsg: false
-                });
-                choices[0].href = '#pop' + pagen;
-                choices[1].href = '#pop' + pagen;
-                choices[2].href = '#pop' + pagen;
-                choices[3].href = '#pop' + pagen;
-            }, 500);
-
-
-        });
-
-        //var cur = choices[0];
-
-    $page.page();
-    $content.find(":jqmData(role='listview')").listview();
-    options.dataUrl = urlObj.href + '?num=' + questionNumber;
-    $.mobile.changePage($page, options);
-
-    }
-
-</script>
+<script src="showquestions.js"></script>
