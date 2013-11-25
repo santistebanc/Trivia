@@ -115,12 +115,10 @@ function loadQuestion(quest,pagenum) {
 
     $(correctchoice).bind("click", function () {
         $(correctchoice).unbind("click");
-        if(Number(localStorage.globalscore) >= 0){
             localStorage.globalscore = Number(localStorage.globalscore)+1;
-            localStorage.correctnum = Number(localStorage.correctnum)+1;
-            $( "#corr1").html(localStorage.correctnum);
-            $( "#corr2").html(localStorage.correctnum);
-        }
+        localStorage.correctnum = Number(localStorage.correctnum)+1;
+        $( "#corr1").html(localStorage.correctnum);
+        $( "#corr2").html(localStorage.correctnum);
         localStorage.currentquest = Number(localStorage.currentquest)+1;
         choices[0].href = '#';
         choices[1].href = '#';
