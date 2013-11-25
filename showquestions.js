@@ -20,7 +20,7 @@ $(document).bind("pagebeforechange", function (e, data) {
         if(url.hash.search(/^#browse/) !== -1){
 
             var markup = '<ul id="listofquestions" data-role="listview" data-filter="true">';
-            for(q in questions){
+            for(q=0;q<=Number(localStorage.currentquest);q++){
                 markup += '<li><h1>#Q';
                 markup += questions[q].id;
                 markup += '</h1><h2>';
@@ -42,9 +42,12 @@ $(document).bind("pagebeforechange", function (e, data) {
 
         if(url.hash.search(/^#question\?restart/) !== -1){
             var list = questions;
-            shuffle(list);
+            //shuffle(list);
             sessionStorage.questions = JSON.stringify(list);
             localStorage.currentquest = 0;
+            localStorage.globalscore = 0;
+            localStorage.correctnum = 0;
+            localStorage.wrongnum = 0;
             data.toPage =  '#question1';
             var num = Number(list[0].id);
             loadQuestion(questions[num-1],1);
@@ -94,6 +97,11 @@ function loadQuestion(quest,pagenum) {
     choices[2].href = '#wrongpop'+pagenum;
     choices[3].href = '#wrongpop'+pagenum;
 
+    $( "#corr1").html(localStorage.correctnum);
+    $( "#wro1").html(localStorage.wrongnum);
+    $( "#corr2").html(localStorage.correctnum);
+    $( "#wro2").html(localStorage.wrongnum);
+
     var correctchoice;
     for(it in choices){
         if(choices[it].innerHTML == ans){
@@ -107,6 +115,12 @@ function loadQuestion(quest,pagenum) {
 
     $(correctchoice).bind("click", function () {
         $(correctchoice).unbind("click");
+        if(Number(localStorage.globalscore) >= 0){
+            localStorage.globalscore = Number(localStorage.globalscore)+1;
+            localStorage.correctnum = Number(localStorage.correctnum)+1;
+            $( "#corr1").html(localStorage.correctnum);
+            $( "#corr2").html(localStorage.correctnum);
+        }
         localStorage.currentquest = Number(localStorage.currentquest)+1;
         choices[0].href = '#';
         choices[1].href = '#';
@@ -116,6 +130,7 @@ function loadQuestion(quest,pagenum) {
         $(correctchoice).attr('href', '#correctpop'+pagenum);
 
        setTimeout(function () {
+           $(correctchoice).attr('href', '');
            goCurrentQuestion();
         }, 500);
 
@@ -125,10 +140,16 @@ function loadQuestion(quest,pagenum) {
 
 $( "#wrongpop1" ).bind({
     popupafteropen: function(event, ui) {
+        localStorage.globalscore = Number(localStorage.globalscore)-1;
+        localStorage.wrongnum = Number(localStorage.wrongnum)+1;
+        $( "#wro1").html(localStorage.wrongnum);
         setTimeout(function () { $( "#wrongpop1").popup( "close" )}, 100);
     }});
 
 $( "#wrongpop2" ).bind({
     popupafteropen: function(event, ui) {
+        localStorage.globalscore = Number(localStorage.globalscore)-1;
+        localStorage.wrongnum = Number(localStorage.wrongnum)+1;
+        $( "#wro2").html(localStorage.wrongnum);
         setTimeout(function () { $( "#wrongpop2").popup( "close" )}, 100);
     }});

@@ -3,9 +3,9 @@ $(document).bind("mobileinit", function () {
     $.mobile.allowCrossDomainPages = true;
     $.mobile.defaultPageTransition = 'slide';
     $.mobile.phonegapNavigationEnabled = true;
-    if(localStorage.storedquestions && localStorage.currentquest){
+    if(localStorage.storedquestions && localStorage.currentquest && localStorage.globalscore && localStorage.correctnum && localStorage.wrongnum){
         var data = JSON.parse(localStorage.storedquestions);
-        shuffle(data);
+        //shuffle(data);
         sessionStorage.questions = JSON.stringify(data);
     }else{
         $('#info').innerHTML = 'Loading Questions';
@@ -16,6 +16,9 @@ $(document).bind("mobileinit", function () {
         shuffle(data);
         sessionStorage.questions = JSON.stringify(data);
         localStorage.currentquest = 0;
+        localStorage.globalscore = 0;
+        localStorage.correctnum = 0;
+        localStorage.wrongnum = 0;
         $('#info').innerHTML = '';
         $('#play').removeClass("ui-disabled");
     });
@@ -39,6 +42,8 @@ function loadquestdata(data){
         questdata[i].category = data.feed.entry[i]['gsx$category']['$t'];
         questdata[i].date = data.feed.entry[i]['gsx$date']['$t'];
         questdata[i].source = data.feed.entry[i]['gsx$source']['$t'];
+
+        questdata[i].score = 0;
     }
     return questdata;
 }
