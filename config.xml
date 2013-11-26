@@ -4,12 +4,12 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.santistebanc.trivia"
-        version   = "1.3.3">
+        version   = "1.3.4">
 
     <name>Trivia</name>
 
     <description>
-        It's a small app of question and answer about several subjects
+        It's a small app of multiple choice quiz.
     </description>
 
     <author href="http://phonegap.com" email="santistebanc94@gmail.com">
