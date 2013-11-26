@@ -151,9 +151,10 @@ function loadQuestion(quest,pagenum) {
     content.find(":jqmData(role='listview')").listview();
 
     $(correctchoice).bind("click", function () {
-        $(correctchoice).unbind("click");
+        $(this).unbind("click");
             localStorage.globalscore = Number(localStorage.globalscore)+1;
         localStorage.correctnum = Number(localStorage.correctnum)+1;
+        console.log('correct');
         $( "#corr1").html(localStorage.correctnum);
         $( "#corr2").html(localStorage.correctnum);
         localStorage.currentquest = Number(localStorage.currentquest)+1;

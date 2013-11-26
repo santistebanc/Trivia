@@ -17,7 +17,9 @@
 <!-- Home page -->
 <div id="home" data-role="page" data-theme="c">
     <div data-role="content">
+        <div>
         <img src="res/Trivia-Logo.png">
+            </div>
         <div data-role="controlgroup">
             <a href="#" data-role="button" id="play" onclick="goCurrentQuestion()">Play</a>
             <a href="#check" data-role="button">Update Questions</a>
@@ -39,6 +41,7 @@
         <h1>About</h1>
     </div>
     <div data-role="content">
+        <img src="logo.jpg">
         <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, multiple choice quiz game. It is currently in Beta phase.</p>
         <p>This app will never use, record or ask for any of your personal information. Only your scores may be saved anonymously to our database. </p>
 
@@ -55,12 +58,12 @@
 </div>
 
 <!-- No more questions-->
-<div id="no-more-questions" data-role="page" data-theme="d">
+<div id="no-more-questions" data-role="page" data-theme="c">
     <div data-role="header" data-theme="c">
         <a href="#home" data-role="button" data-mini="true" data-direction="reverse">Quit</a>
-        <h1>No more questions</h1>
+        <h1>No questions</h1>
     </div>
-    <div data-role="content" data-theme='c'>
+    <div data-role="content" data-theme="d">
         <h3>Sorry, there are no more questions left. But we'll be uploading new soon.
             You can restart the game <a href="#question?restart">here</a> (WARNING: your score will also be reset to 0)</h3>
     </div>
