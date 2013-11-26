@@ -18,14 +18,18 @@
 <div id="home" data-role="page" data-theme="c">
     <div data-role="content">
         <img src="res/Trivia-Logo.png">
-        <div>
-            <p id='info'></p>
-        </div>
         <div data-role="controlgroup">
             <a href="#" data-role="button" id="play" onclick="goCurrentQuestion()">Play</a>
-            <a href="#browse" data-role="button">Questions</a>
+            <a href="#check" data-role="button">Update Questions</a>
+            <a href="#browse" data-role="button">Browse Questions</a>
             <a href="#about" data-role="button">About</a>
         </div>
+    </div>
+    <div id="noupdates" data-role="popup" data-theme="a" class="ui-content" data-history="false">
+        <h3>There are currently no updates.</h3>
+    </div>
+    <div id="updated" data-role="popup" data-theme="a" class="ui-content" data-history="false">
+        <h3>Updated</h3>
     </div>
 </div>
 
@@ -35,10 +39,10 @@
         <h1>About</h1>
     </div>
     <div data-role="content">
-        <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, trivia style,
-            multiple choice quiz game.</p>
+        <p>This app was created for the 'Ingenieria de Software' class final project. It is a simple, multiple choice quiz game. It is currently in Beta phase.</p>
+        <p>This app will never use, record or ask for any of your personal information. Only your scores may be saved anonymously to our database. </p>
 
-        <p>To download this app for other platforms visit <a href="http://build.phonegap.com/apps/646900/share">here</a></p>
+        <p>To download this app for any of all major mobile platforms visit <a href="http://build.phonegap.com/apps/646900/share">here</a> (iOS not supported yet)</p>
     </div>
 </div>
 

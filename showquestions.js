@@ -20,12 +20,12 @@ $(document).bind("pagebeforechange", function (e, data) {
         if(url.hash.search(/^#browse/) !== -1){
 
             var markup = '<ul id="listofquestions" data-role="listview" data-filter="true">';
-            for(q=0;q<=Number(localStorage.currentquest);q++){
+            for(q=0;q<questions.length;q++){
                 markup += '<li><h1>#Q';
                 markup += questions[q].id;
-                markup += '</h1><h2>';
+                markup += '</h1><div><strong>';
                 markup += questions[q].question;
-                markup += '</h2>';
+                markup += '</strong></div><br>';
                 markup += '<p>'+questions[q].choice1+'</p>';
                 markup += '<p>'+questions[q].choice2+'</p>';
                 markup += '<p>'+questions[q].choice3+'</p>';
@@ -37,6 +37,39 @@ $(document).bind("pagebeforechange", function (e, data) {
             $("#browse").children( ":jqmData(role=content)" ).html(markup);
             $("#browse").page();
             $("#browse").children( ":jqmData(role=content)" ).find( ":jqmData(role=listview)" ).listview();
+
+        }
+
+        if(url.hash.search(/^#check/) !== -1){
+            $.mobile.loading( 'show', {
+                text: 'checking...',
+                textVisible: true
+            });
+            $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0Ahrn8W_r85_odDJ1a0hnLUZOa05vSVNzemtPOXN1MXc/od6/public/values?alt=json", function (data) {
+                var data = loadquestdata(data);
+                if(localStorage.storedquestions != JSON.stringify(data)){
+                    var loc = JSON.parse(localStorage.storedquestions);
+                    var num = data.length-loc.length;
+                    var mes = '';
+                    if(num == 0){
+                        mes = 'Updated questions.';
+                    }else{
+                        mes = 'Added '+ num + ' new questions.';
+                    }
+                    localStorage.storedquestions = JSON.stringify(data);
+                    sessionStorage.questions = JSON.stringify(data);
+                    $("#updated h3").html(mes);
+                    $("#updated").popup('open');
+                 }else{
+                    $("#noupdates").popup('open');
+                }
+                $.mobile.loading( "hide" );
+            }).fail(function() {
+                    console.log( "error" );
+                })
+                .always(function() {
+                        $.mobile.loading( "hide" );
+                });
 
         }
 
@@ -57,6 +90,10 @@ $(document).bind("pagebeforechange", function (e, data) {
 
     }
 
+});
+
+$( '#check' ).bind("pageshow", function (event) {
+     alert('here');
 });
 
 function goCurrentQuestion() {
@@ -128,7 +165,7 @@ function loadQuestion(quest,pagenum) {
         $(correctchoice).attr('href', '#correctpop'+pagenum);
 
        setTimeout(function () {
-           $(correctchoice).attr('href', '');
+           $(correctchoice).attr('href', '#');
            goCurrentQuestion();
         }, 500);
 

@@ -8,18 +8,15 @@ $(document).bind("mobileinit", function () {
         //shuffle(data);
         sessionStorage.questions = JSON.stringify(data);
     }else{
-        $('#info').innerHTML = 'Loading Questions';
         $('#play').addClass("ui-disabled");
     $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0Ahrn8W_r85_odDJ1a0hnLUZOa05vSVNzemtPOXN1MXc/od6/public/values?alt=json", function (data) {
         var data = loadquestdata(data);
         localStorage.storedquestions = JSON.stringify(data);
-        shuffle(data);
         sessionStorage.questions = JSON.stringify(data);
         localStorage.currentquest = 0;
         localStorage.globalscore = 0;
         localStorage.correctnum = 0;
         localStorage.wrongnum = 0;
-        $('#info').innerHTML = '';
         $('#play').removeClass("ui-disabled");
     });
 
