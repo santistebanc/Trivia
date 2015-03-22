@@ -45,7 +45,7 @@ $(document).bind("pagebeforechange", function (e, data) {
                 text: 'checking...',
                 textVisible: true
             });
-            $.getJSON("http://cors.io/spreadsheets.google.com/feeds/list/0Ahrn8W_r85_odDJ1a0hnLUZOa05vSVNzemtPOXN1MXc/od6/public/values?alt=json", function (data) {
+            $.getJSON("https://spreadsheets.google.com/feeds/list/0Ahrn8W_r85_odDJ1a0hnLUZOa05vSVNzemtPOXN1MXc/od6/public/values?alt=json", function (data) {
                 var data = loadquestdata(data);
                 if(localStorage.storedquestions != JSON.stringify(data)){
                     var loc = JSON.parse(localStorage.storedquestions);
